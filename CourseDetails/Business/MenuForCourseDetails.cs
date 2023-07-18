@@ -13,7 +13,7 @@ namespace CourseDetails.Business
         public void StoredProcedure()
         {
             int a;
-            GetCourseInfoRepository obj1 = new GetCourseInfoRepository();
+            GetCourseInfoRepository obj1 = new GetCourseInfoRepository(); 
             Details obj = new Details();
             
 
