@@ -36,8 +36,8 @@ namespace CourseDetails.Business
 
 
                         var SIBI = obj1.CourseInfo();
-                        obj1.
-                            (SIBI);
+                        obj1.Insert  (SIBI);
+
                         break;
 
                     case 2:

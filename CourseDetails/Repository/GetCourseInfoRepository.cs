@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CourseDetails.Model;
-
-using System.Data.SqlClient;
+﻿using CourseDetails.Model;
 using Dapper;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
 namespace CourseDetails.Repository
+
 {
     class GetCourseInfoRepository
     {
         
-
-            public readonly string conectionstring;
+           public readonly string conectionstring;
 
             
-
             public Details CourseInfo()
             {
 
@@ -47,9 +43,7 @@ namespace CourseDetails.Repository
                 conectionstring = @"Data source=DESKTOP-TKPKUBE\SQLEXPRESS;Initial catalog=SQL QUERIES;User Id=sa;Password=Anaiyaan@123";
             }
 
-            public void Insert(Details A
-
-        )
+            public void Insert  (Details A)
             {
                 try
                 {
