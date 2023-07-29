@@ -4,98 +4,164 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+
 namespace CourseDetails.Repository
 
 {
-    class GetCourseInfoRepository
+     public class GetCourseInfoRepository
     {
-        
-           public readonly string conectionstring;
 
-            
-            public Details CourseInfo()
+        public readonly string conectionstring;
+
+
+        //public Details CourseInfo()
+        //{
+
+        //    Details s = new Details();
+
+        //    Console.WriteLine("Enter Course Name");
+        //    s.CourseName = Console.ReadLine();
+
+        //    Console.WriteLine("Enter  Duration");
+        //    s.Duration = Convert.ToInt32(Console.ReadLine());
+
+        //    Console.WriteLine("Enter Name of the University");
+        //    s.University = Console.ReadLine();
+
+
+        //    Console.WriteLine("Enter the course Start Date");
+        //    s.StartDate = Console.ReadLine();
+
+
+        //    Console.WriteLine("Enter  the Number of seats Available");
+        //    s.Seats = Convert.ToInt32(Console.ReadLine());
+        //    return s;
+        //}
+
+        public GetCourseInfoRepository()
+        {
+
+            conectionstring = @"Data source=DESKTOP-1U0BM0H\SQLEXPRESS;Initial catalog=SQL_DB;User Id=sa;Password=Anaiyaan@123";
+        }
+        public List<Details> SelectSP()
+
+        {
+            try
             {
+                List<Details> constrain = new List<Details>();
 
-                Details s = new Details();
+                var connection = new SqlConnection(conectionstring);
+                connection.Open();
+                constrain = connection.Query<Details>("  exec GetAllCourseDetails; ", conectionstring).ToList();
+                connection.Close();
 
-                Console.WriteLine("Enter Course Name");
-                s.CourseName = Console.ReadLine();
+                return constrain;
 
-                Console.WriteLine("Enter  Duration");
-                s.Duration = Convert.ToInt32(Console.ReadLine());
-
-                Console.WriteLine("Enter Name of the University");
-                s.University = Console.ReadLine();
-
-
-                Console.WriteLine("Enter the course Start Date");
-                s.StartDate = Console.ReadLine();
-
-
-                Console.WriteLine("Enter  the Number of seats Available");
-                s.Seats = Convert.ToInt32(Console.ReadLine());
-                return s;
             }
-
-            public GetCourseInfoRepository()
+            catch (SqlException e)
             {
-
-                conectionstring = @"Data source=DESKTOP-TKPKUBE\SQLEXPRESS;Initial catalog=SQL QUERIES;User Id=sa;Password=Anaiyaan@123";
+                throw;
             }
-
-            public void Insert  (Details A)
+            catch (Exception ex)
             {
-                try
-                {
-
-                    SqlConnection con = new SqlConnection(conectionstring);
-
-                    con.Open();
-                    con.Execute($"exec InsertAllCourseDetails '{A.CourseName}',{A.Duration},'{A.University}','{A.StartDate}',{A.Seats}");
-
-                    con.Close();
-
-                }
-                catch (SqlException ep)
-                {
-                    throw;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
-
-            public List<Details> Select()
-
-            {
-
-                try
-
-                {
-
-                    List<Details> c = new List<Details>();
-                    var connection = new SqlConnection(conectionstring);
-                    connection.Open();
-                    c = connection.Query<Details>("select * from CourseDetailsInfo").ToList();
-
-                    connection.Close();
-                    foreach (var a in c)
-                    {
-                        Console.WriteLine($" CourseId-{a.CourseId} ,Course Name - {a.CourseName }, Duration  - {a.Duration},  University  - {a.University} , Starting Date is - {a.StartDate}, Number of Seats Available - {a.Seats}");
-                    }
-
-                    return c;
-                }
-
-                catch (Exception ex)
-
-                {
-
-                    throw ex;
-
-                }
+                throw ex;
             }
 
         }
-    } 
+
+        public List<Details> SelectSP(int CourseId)
+
+        {
+
+           List<Details> constrain = new List<Details>();
+
+            var connection = new SqlConnection(conectionstring);
+            connection.Open();
+            constrain = connection.Query<Details>($"exec [GetCourseDetails] {CourseId}").ToList();
+            connection.Close();
+
+            return constrain;
+        }
+
+
+
+        public void InsertSP(Details a)
+        {
+            try
+            {
+
+                SqlConnection con = new SqlConnection(conectionstring);
+
+                con.Open();
+                con.Execute($"exec [InsertAllCourseDetails]  '{a.CourseName}','{a.Duration}','{a.University}','{a.StartDate}',{a.Seats}");
+
+                //con.Execute($"insert into stubio(FirstName,LastName,Age,Email,Gender) values('{a.FirstName}', '{a.LastName}','{a.age}','{a.email}','{a.gender}')");
+
+
+                con.Close();
+
+            }
+            catch (SqlException e)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+
+
+        public void UpdateSP(Details u)
+        {
+            try
+            {
+                SqlConnection con = new SqlConnection(conectionstring);
+
+
+                con.Open();
+                con.Execute($"  exec updateCourseDetails '{u.CourseId}','{u.University}' ");
+
+
+
+                con.Close();
+            }
+            catch (SqlException e)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        public void DeleteSP(int CourseId)
+        {
+            try
+            {
+                SqlConnection con = new SqlConnection(conectionstring);
+
+
+                con.Open();
+                con.Execute($"EXEC [DeleteCourseDetails] '{CourseId}'");
+
+
+                con.Close();
+            }
+            catch (SqlException e)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+    }
+}

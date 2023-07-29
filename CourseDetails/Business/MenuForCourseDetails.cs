@@ -12,27 +12,29 @@ namespace CourseDetails.Business
     {
         public void StoredProcedure()
         {
-            int a;
+            int d;
             GetCourseInfoRepository obj1 = new GetCourseInfoRepository(); 
             Details obj = new Details();
             
 
-            do
+           /* do
             {
 
                 Console.WriteLine("Choose a option");
 
                 Console.WriteLine("1.InsertSP");
                 Console.WriteLine("2.ListSP");
-                Console.WriteLine("3.Exit");
+                Console.WriteLine("3.UpdateSP");
+                Console.WriteLine("4.DeleteSP");
+                Console.WriteLine("5.Exit");
 
 
-                a = Convert.ToInt32(Console.ReadLine());
+                d = Convert.ToInt32(Console.ReadLine());*/
 
 
-                switch (a)
-                {
-                    case 1:
+            /*    switch (d)
+                {*/
+                    /*case 1:
 
 
                         var SIBI = obj1.CourseInfo();
@@ -45,14 +47,23 @@ namespace CourseDetails.Business
                         obj1.Select();
                         break;
 
-                    default:
+                    case 3:
 
-                        Console.WriteLine("You are choosing a wrong option for CRUD Operation please select the option any one option ");
+                        obj1.updateSP();
+                        break;
+
+                    case 4:
+                        obj1.deleteSP();
+                        break;
+
+                    default:
+*/
+                      /*  Console.WriteLine("You are choosing a wrong option for CRUD Operation please select the option any one option ");
                         break;
 
                 }
 
-            } while (a != 0);
+            } while (d != 0);*/
 
 
         }
