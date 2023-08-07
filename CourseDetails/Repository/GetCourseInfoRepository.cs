@@ -41,7 +41,7 @@ namespace CourseDetails.Repository
         public GetCourseInfoRepository()
         {
 
-            conectionstring = @"Data source=DESKTOP-1U0BM0H\SQLEXPRESS;Initial catalog=SQL_DB;User Id=sa;Password=Anaiyaan@123";
+            conectionstring = @"Data source=DESKTOP-TKPKUBE\SQLEXPRESS;Initial catalog=SQL QUERIES;User Id=sa;Password=Anaiyaan@123";
         }
         public List<Details> SelectSP()
 
@@ -69,15 +69,15 @@ namespace CourseDetails.Repository
 
         }
 
-        public List<Details> SelectSP(int CourseId)
+        public Details SelectSP(int CourseId)
 
         {
 
-           List<Details> constrain = new List<Details>();
+           //List<Details> constrain = new List<Details>();
 
             var connection = new SqlConnection(conectionstring);
             connection.Open();
-            constrain = connection.Query<Details>($"exec [GetCourseDetails] {CourseId}").ToList();
+             var constrain = connection.QueryFirst<Details>($" exec GetCourseDetails {CourseId}");
             connection.Close();
 
             return constrain;
@@ -122,7 +122,7 @@ namespace CourseDetails.Repository
 
 
                 con.Open();
-                con.Execute($"  exec updateCourseDetails '{u.CourseId}','{u.University}' ");
+                con.Execute($"  exec UpdateCourseDetails '{u.CourseId}','{u.CourseName}','{u.Duration}','{u.University}','{u.StartDate}','{u.Seats}' ");
 
 
 
