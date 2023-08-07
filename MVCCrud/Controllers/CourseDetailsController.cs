@@ -88,7 +88,7 @@ namespace MVCCrud.Controllers
         }
 
         // POST: CourseDetailsController/Delete/5
-        [HttpPost]
+        [HttpPost]    
         [ValidateAntiForgeryToken]
         public ActionResult Remove(int Courseid)
         {
